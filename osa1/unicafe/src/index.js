@@ -7,10 +7,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const setters = {'setGood': setGood, 'setNeutral': setNeutral, 'setBad': setBad}
-  const getters = {'getGood': good, 'setNeutral': neutral, 'setBad': bad}
-
-  let addReview = (type) => {
+  let addFeedback = (type) => {
     switch(type) {
       case 'good': setGood(good + 1); break;
       case 'neutral': setNeutral(neutral + 1); break;
@@ -20,7 +17,9 @@ const App = () => {
 
   return (
     <div>
-      <FeedbackComponent addFeedback={(type) => addReview(type)} />
+      <h2>give feedback</h2>
+      <FeedbackComponent addFeedback={(type) => addFeedback(type)} />
+      <h2>statistics</h2>
       <StatisticsComponent good={good} neutral={neutral} bad={bad} />
     </div>
   )
@@ -29,7 +28,6 @@ const App = () => {
 const FeedbackComponent = ({addFeedback}) => {
   return (
     <div>
-      <h2>give feedback</h2>
       <Button type={'good'} handleClick={(type) => addFeedback(type)} ></Button>
       <Button type={'neutral'} handleClick={(type) => addFeedback(type)} ></Button>
       <Button type={'bad'} handleClick={(type) => addFeedback(type)} ></Button>
@@ -46,19 +44,30 @@ const StatisticsComponent = ({good, neutral, bad}) => {
   let avg = (good * 1 + bad * (-1)) / sum;
   let positivePercent = sum > 0 ? good / sum : 0;
   
-  return (
-    <div>
-      <h2>statistics</h2>
-      <ul>
-        <li>good {good}</li>
-        <li>neutral {neutral}</li>
-        <li>bad {bad}</li>
-        <li>sum {sum}</li>
-        <li>average {avg}</li>
-        <li>positive {positivePercent}</li>
-      </ul>
-    </div>
-  )
+  if (sum !== 0) {
+    return (
+      <table>
+        <tbody>
+          <StatisticsLine text="good" value={good} />
+          <StatisticsLine text="neutral" value={neutral} />
+          <StatisticsLine text="bad" value={bad} />
+          <StatisticsLine text="sum" value={sum} />
+          <StatisticsLine text="avg" value={avg} />
+          <StatisticsLine text="positive" value={positivePercent} />
+        </tbody>
+      </table>
+    )
+  } else {
+      return ( <p>No feedback given</p> )
+  }
+}
+
+const StatisticsLine = ({text, value}) => {
+  return(
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>)
 }
 
 ReactDOM.render(<App />, 
