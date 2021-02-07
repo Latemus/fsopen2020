@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
+  
+  const [counter, setCounter] = useState(0)
+  //setTimeout(() => setCounter(counter +1), 1000)
+
   const course = {
     name: 'Half Stack application development',
     parts: [
@@ -25,40 +29,41 @@ const App = () => {
       <Header course={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
+      <div>{counter}</div>
+      <button onClick={() => setCounter(counter + 10)}>add 10</button>
+      <button onClick={() => setCounter(0)}>reset</button>
     </div>
   )
 }
 
-const Header = (props) => {
+const Header = ({course}) => {
   return (
-    <h1>{props.course}</h1>
+    <h1>{course}</h1>
   )
 }
 
-const Content = (props) => {
+const Content = ({parts}) => {
   return (
     <div>
-      {props.parts.map(part => 
+      {parts.map(part => 
         <Part part={part} />
       )}
     </div>
   )
 }
 
-const Part = (props) => {
+const Part = ({part}) => {
   return (
     <p>
-      {props.part.name} {props.part.exercises} 
+      {part.name} {part.exercises} 
     </p>
   )
 }
 
-const Total = (props) => {
+const Total = ({parts}) => {
   return (
     <p>Number of exercises {
-      props.parts
-      .map((part) => {return part.exercises; })
-      .reduce((a,b) => a + b, 0)}
+      parts.map(part => part.exercises).reduce((a,b) => a + b, 0)}
     </p>
   )
 }
