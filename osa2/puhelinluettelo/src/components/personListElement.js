@@ -1,8 +1,8 @@
 const PersonListElement = ({person}) => {
    const {name, number} = person;
-   
+
    return (            
-      <li key={name}>
+      <li>
          {name} {number}
       </li>
    );
