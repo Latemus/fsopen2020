@@ -1,20 +1,19 @@
 import CountryInfoBox from "./countryInfoBox";
 import CountryListElement from "./countryListElement";
 
-const CountryList = ({ countries, filterInput }) => {
+const CountryList = ({ countries, filterInput, selectCountryToShow }) => {
 
    const tooManyMatches = countries.length > 10;
    const noCountryMatches = filterInput.length > 0 && countries.length === 0;
-
-   const showCountiNamesList = countries.length > 1 && !tooManyMatches && !noCountryMatches
+   const showCountriesNamesList = countries.length > 1 && !tooManyMatches && !noCountryMatches
 
    return (
       <div>
          <h3>Results:</h3>
          <ul>
-            {showCountiNamesList && 
+            {showCountriesNamesList && 
                countries.map(country => 
-                  <CountryListElement country={country} key={country.name.common} />
+                  <CountryListElement country={country} selectCountryToShow={selectCountryToShow} key={country.name.common} />
                )
             }
             {tooManyMatches && 

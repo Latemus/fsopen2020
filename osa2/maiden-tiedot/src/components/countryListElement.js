@@ -1,7 +1,9 @@
-const CountryListElement = ({country}) => {
+const CountryListElement = ({country, selectCountryToShow}) => {
+
    return (            
       <li>
-         {country.name.common}
+         <span>{country.name.common} </span>
+         <button onClick={() => selectCountryToShow(country.name.common)}>show</button>
       </li>
    );
 }

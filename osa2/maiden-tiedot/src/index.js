@@ -13,10 +13,8 @@ const App = () => {
     if (filterInput.length == 0) {
       return
     }
-
     // Cancel earlier request so that the list is not updated with data from older request that is received after a later request
     abortController?.abort()
-
     // Create new AbortController for this request so that it can be aborted if new request is sent before this one is finished
     const controller = new AbortController()
     axios
@@ -34,12 +32,16 @@ const App = () => {
 
   }, [filterInput])
 
+  const selectCountryToShow = (countryName) => {
+    let filteredList = countries.filter(country => country.name.common === countryName)
+    setCountries(filteredList)
+  }
+
   return (
     <div>
       <h2>Country info search tool</h2>
       <FilterForm filterInput={filterInput} setFilterInput={setFilterInput} />
-      
-      <CountryList countries={countries} filterInput={filterInput} />
+      <CountryList countries={countries} filterInput={filterInput} selectCountryToShow={selectCountryToShow} />
     </div>
   )
 
