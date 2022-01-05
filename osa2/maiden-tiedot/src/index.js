@@ -23,7 +23,6 @@ const App = () => {
       })
       .then(response => {
         setCountries(response.data)
-        console.log(response.data)
       })
       .catch(() => {
         setCountries([])
