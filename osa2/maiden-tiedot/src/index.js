@@ -22,6 +22,7 @@ const App = () => {
         signal: controller.signal
       })
       .then(response => {
+        console.log(response.data)
         setCountries(response.data)
       })
       .catch(() => {

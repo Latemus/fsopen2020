@@ -6,13 +6,17 @@ import axios from 'axios'
 const CountryInfoBox = ({country}) => {
 
    const [ weatherData, setWeatherData ] = useState(null)
-   const {name, capital, capitalInfo, population, languages, flags} = country
+   const {name, capital, capitalInfo, population, languages, flags, coatOfArms} = country
 
    const languageList = Object.values(languages).map(language => (
       <li key={name?.common + '_lang_' + language}>
          {language}
       </li>
    ))
+
+   function numberWithSpaces(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
 
    useEffect(() => {
       // http://www.7timer.info/doc.php?lang=en
@@ -32,12 +36,13 @@ const CountryInfoBox = ({country}) => {
       <div>
          <h3>{name.common} - ({name.official})</h3>
          <div>capital: {capital}</div>
-         <div>population: {population}</div>
+         <div>population: {numberWithSpaces(population)}</div>
          <h4>languages:</h4>
          <ul>
             {languageList}
          </ul>
          <FlagContainer svgUrl={flags?.svg} />
+         <FlagContainer svgUrl={coatOfArms?.svg} />
          <h4>Weather in {capital}</h4>
          <div>
             {!weatherData && "Fetching weather data for capital"}
