@@ -1,9 +1,9 @@
-const PersonListElement = ({person}) => {
-   const {name, number} = person;
+const PersonListElement = ({person, removePerson}) => {
+   const {name, number, id} = person;
 
    return (            
       <li>
-         {name} {number}
+         {name} {number} <button onClick={() => removePerson(person)} >delete</button>
       </li>
    );
 }

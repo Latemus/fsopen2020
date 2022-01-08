@@ -24,7 +24,7 @@ const InputForm = ({ addHandler }) => {
 
    return (
       <div>
-         <h3>Add new person</h3>
+         <h3>Add new person or update existing person</h3>
          <form>
             <div>
                name: <input value={newName} onChange={updateName} />
@@ -33,7 +33,7 @@ const InputForm = ({ addHandler }) => {
                number: <input value={newNumber} onChange={updateNumber} />
             </div>
             <div>
-               <button type="submit" onClick={addNewPerson}>add</button>
+               <button type="submit" onClick={addNewPerson}>add / update</button>
             </div>
          </form>
       </div>
