@@ -16,7 +16,7 @@ const PhonebookList = ({ persons, filterInput, removePerson }) => {
          <h3>Numbers</h3>
          <ul>
             {filteredList.map(person => 
-               <PersonListElement person={person} removePerson={removePerson} key={person.name} />
+               <PersonListElement person={person} removePerson={removePerson} key={person.id} />
             )}
          </ul>
       </div>
