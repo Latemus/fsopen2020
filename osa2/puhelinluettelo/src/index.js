@@ -38,7 +38,7 @@ const App = () => {
         setSuccessMsg(`Person ${person.name} added succesfully`)
       })
       .catch(error => {
-        setErrorMsg(`Error: couldn\'t add person named ${newPerson.name}. ${error}`)
+        setErrorMsg(`Error: couldn\'t add person named ${newPerson.name}. ${error.response.data.error}`)
       })
   }
 
